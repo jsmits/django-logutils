@@ -1,4 +1,4 @@
-# (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.txt.
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -9,6 +9,10 @@ import time
 
 from django.conf import settings
 from django.db import connection
+
+from django_logutils.models import LogutilsAppConf
+
+logutils_settings = LogutilsAppConf()
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +67,7 @@ class LoggingMiddleware(object):
             log_dict = {
                 # 'event' makes event-based filtering possible in logging
                 # backends like logstash
-                'event': 'request_response',
+                'event': logutils_settings.LOGGING_MIDDLEWARE_EVENT,
                 'remote_address': remote_addr,
                 'user_email': user_email,
                 'method': request.method,
