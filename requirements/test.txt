@@ -1,0 +1,14 @@
+-r common.txt
+
+coverage>=3.7.1
+coveralls>=0.5
+factory-boy==2.5.2
+flake8>=2.1.0
+mock>=1.0.1
+pylint>=1.4.3
+pylint-django>=0.6.1
+pytest>=2.7.2
+pytest-django>=2.8.0
+pytest-xdist>=1.12
+tox>=1.7.0
+
