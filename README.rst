@@ -13,7 +13,7 @@ Various logging-related utilities for Django projects.
 Documentation
 -------------
 
-TODO: The full documentation is at https://django-logutils.readthedocs.org.
+TODO: The full documentation is at https://django-logutils.readthedocs.org (not yet!).
 
 Quickstart
 ----------
