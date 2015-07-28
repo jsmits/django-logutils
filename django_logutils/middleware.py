@@ -20,18 +20,18 @@ logger = logging.getLogger(__name__)
 def create_log_dict(request, response):
     """
     Create a dictionary with logging data.
-    """ 
+    """
     remote_addr = request.META.get('REMOTE_ADDR')
     if remote_addr in getattr(settings, 'INTERNAL_IPS', []):
         remote_addr = request.META.get(
             'HTTP_X_FORWARDED_FOR') or remote_addr
-    
+
     user_email = "-"
     if hasattr(request, 'user'):
         user_email = getattr(request.user, 'email', '-')
 
     return {
-        # 'event' makes event-based filtering possible in logging backends 
+        # 'event' makes event-based filtering possible in logging backends
         # like logstash
         'event': appsettings.LOGGING_MIDDLEWARE_EVENT,
         'remote_address': remote_addr,
@@ -49,8 +49,8 @@ def create_log_message(log_dict, use_sql_info=False):
     Create the logging message string.
     """
     log_msg = (
-        "{remote_address} {user_email} {method} {url} {status} {content_length}"
-        " ({request_time:.2f} seconds)"
+        "{remote_address} {user_email} {method} {url} {status} "
+        "{content_length} ({request_time:.2f} seconds)"
     )
     if use_sql_info:
         sql_time = sum(
@@ -67,7 +67,7 @@ class LoggingMiddleware(object):
     """
     Capture request info and logs it.
 
-    Logs all requests with log level info. If request take longer than 
+    Logs all requests with log level info. If request take longer than
     REQUEST_TIME_THRESHOLD, log level warningis used.
 
     Logging middleware that captures the following:
@@ -79,7 +79,7 @@ class LoggingMiddleware(object):
         * response status code (200, 404 etc).
         * content length.
         * request process time.
-        * if DEBUG=True or REQUEST_TIME_THRESHOLD is exceeded, also logs SQL 
+        * if DEBUG=True or REQUEST_TIME_THRESHOLD is exceeded, also logs SQL
           query information - number of queries and how long they too.
 
     Based on: https://djangosnippets.org/snippets/2624/
@@ -105,11 +105,11 @@ class LoggingMiddleware(object):
 
         try:
             log_dict = create_log_dict(request, response)
-            
-            # add the request time to the log_dict; if no start time is 
+
+            # add the request time to the log_dict; if no start time is
             # available, use -1 as NA value
             request_time = (
-                time.time() - self.start_time if hasattr(self, 'start_time') 
+                time.time() - self.start_time if hasattr(self, 'start_time')
                 else -1)
             log_dict.update({'request_time': request_time})
 

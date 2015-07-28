@@ -1,0 +1,3 @@
+- make REQUEST_TIME_THRESHOLD a setting
+- check request method, does not seem to work
+- make the extra keyword argument a setting
