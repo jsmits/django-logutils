@@ -3,7 +3,7 @@
 History
 -------
 
-0.2.1 (unreleased)
+0.2.1 (2015-07-29)
 ++++++++++++++++++
 
 - More and better tests. 
