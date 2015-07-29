@@ -3,7 +3,7 @@
 History
 -------
 
-0.2.2 (unreleased)
+0.2.2 (2015-07-29)
 ++++++++++++++++++
 
 - Add `add_items_to_message` utility function.
