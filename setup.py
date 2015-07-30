@@ -9,7 +9,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = '0.2.3.dev0'
+version = '0.2.4.dev0'
 
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
