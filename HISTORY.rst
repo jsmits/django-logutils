@@ -6,7 +6,7 @@ History
 0.2.3 (unreleased)
 ++++++++++++++++++
 
-- Nothing changed yet.
+- Add `log_event` utility function for logging events. 
 
 
 0.2.2 (2015-07-29)
