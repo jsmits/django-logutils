@@ -44,3 +44,6 @@ docs/_build
 # Virtualenv
 .venv
 
+# Editor
+.idea
+
