@@ -12,4 +12,3 @@ pytest-capturelog>=0.7
 pytest-django>=2.8.0
 pytest-xdist>=1.12
 tox>=1.7.0
-
