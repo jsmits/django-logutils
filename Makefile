@@ -23,8 +23,10 @@ clean-pyc:
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 
-lint:
-	flake8 django_logutils tests --exit-zero
+flake8:
+	flake8 django_logutils tests --max-complexity 10 --exit-zero
+
+lint: flake8
 	pylint --load-plugins pylint_django -f colorized --rcfile=.pylint.cfg --disable=I0011 -j 4 -r n django_logutils/ tests/
 
 test:

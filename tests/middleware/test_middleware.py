@@ -1,9 +1,7 @@
 import time
+
 from mock import Mock
 
-import pytest
-
-from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 
 from django_logutils import middleware
