@@ -3,7 +3,7 @@
 History
 -------
 
-0.2.5 (unreleased)
+0.2.5 (2015-07-31)
 ++++++++++++++++++
 
 - Reach 100% test coverage.
