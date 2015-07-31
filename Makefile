@@ -25,7 +25,7 @@ clean-pyc:
 
 lint:
 	flake8 django_logutils tests --exit-zero
-	pylint --load-plugins pylint_django -f colorized --rcfile=pylint.cfg --disable=I0011 -j 4 -r n django_logutils/ tests/
+	pylint --load-plugins pylint_django -f colorized --rcfile=.pylint.cfg --disable=I0011 -j 4 -r n django_logutils/ tests/
 
 test:
 	coverage run --source django_logutils -m py.test -v

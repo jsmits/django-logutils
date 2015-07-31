@@ -70,8 +70,16 @@ Install the test requirements::
 
 Run the tests to check everything is fine::
 
-    $ ./runtests.sh
+    $ make test
 
-To run pylint, do::
+To run the tests and opening the coverage html in your browser::
 
-    $ ./runpylint.sh
+    $ make coverage
+
+To run flake8 and pylint, do::
+
+    $ make lint
+
+To generate the documentation, do::
+
+    $ make docs

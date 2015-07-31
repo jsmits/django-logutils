@@ -1,26 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-import os
-import sys
+import django_logutils
 
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
-version = '0.2.4.dev0'
-
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload')
-    os.system('python setup.py bdist_wheel upload')
-    sys.exit()
-
-if sys.argv[-1] == 'tag':
-    print("Tagging the version on github:")
-    os.system("git tag -a %s -m 'version %s'" % (version, version))
-    os.system("git push --tags")
-    sys.exit()
+version = django_logutils.__version__ 
 
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
