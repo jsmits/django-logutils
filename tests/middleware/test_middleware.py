@@ -130,3 +130,19 @@ def test_logging_middleware_with_user_email(caplog):
     lmw.process_response(request, HttpResponse())
     record = caplog.records()[0]
     assert record.user_email == 'john@example.com'
+
+
+def test_loglevel_warning_if_request_threshold_exceeded(caplog):
+    lmw = middleware.LoggingMiddleware()
+    lmw.start_time = time.time() - 2  # put the rquest two seconds back in time
+    lmw.process_response(HttpRequest(), HttpResponse())
+    record = caplog.records()[0]
+    assert record.levelname == 'WARNING'
+
+
+def test_logging_middleware_process_response_exception(caplog):
+    lmw = middleware.LoggingMiddleware()
+    # force an AttributeError by using None as response
+    lmw.process_response(HttpRequest(), None)
+    record = caplog.records()[0]
+    assert record.levelname == 'ERROR'
