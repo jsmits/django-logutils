@@ -6,7 +6,7 @@ History
 0.2.4 (unreleased)
 ++++++++++++++++++
 
-- Nothing changed yet.
+- Improve project structure. 
 
 
 0.2.3 (2015-07-30)
