@@ -110,7 +110,7 @@ class LoggingMiddleware(object):
             # available, use -1 as NA value
             request_time = (
                 time.time() - self.start_time if hasattr(self, 'start_time')
-                else -1)
+                and self.start_time else -1)
             log_dict.update({'request_time': request_time})
 
             is_request_time_too_high = request_time > REQUEST_TIME_THRESHOLD

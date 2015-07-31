@@ -1,5 +1,9 @@
 import time
+from mock import Mock
 
+import pytest
+
+from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 
 from django_logutils import middleware
@@ -116,3 +120,13 @@ def test_logging_middleware_with_non_empty_view(client, settings):
     settings.ROOT_URLCONF = 'tests.middleware.urls'
     response = client.get('/non_empty/')
     assert len(response.content) == 5
+
+
+def test_logging_middleware_with_user_email(caplog):
+    request = HttpRequest()
+    request.user = Mock()
+    request.user.email = 'john@example.com'
+    lmw = middleware.LoggingMiddleware()
+    lmw.process_response(request, HttpResponse())
+    record = caplog.records()[0]
+    assert record.user_email == 'john@example.com'
