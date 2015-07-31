@@ -1,6 +1,3 @@
-- test logging with request.user.email
-- test warning logging after exceeding the REQUEST_TIME_THRESHOLD
-- test exception with mock
 - make REQUEST_TIME_THRESHOLD a setting
 - make the extra keyword argument a setting
 
