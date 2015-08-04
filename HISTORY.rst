@@ -4,7 +4,7 @@ History
 -------
 
 
-0.3.1 (unreleased)
+0.3.1 (2015-08-04)
 ++++++++++++++++++
 
 - Update documentation.
