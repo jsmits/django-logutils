@@ -15,6 +15,11 @@ django-logutils
 Various logging-related utilities for Django projects. For now, it provides
 a LoggingMiddleware class and an EventLogger class.
 
+Documentation
+-------------
+
+http://django-logutils.readthedocs.org
+
 Quickstart
 ----------
 
