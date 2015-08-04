@@ -12,6 +12,9 @@ django-logutils
     :target: https://readthedocs.org/projects/django-logutils/?badge=latest
     :alt: Documentation Status
 
+.. image:: https://coveralls.io/repos/jsmits/django-logutils/badge.svg?branch=master&service=github 
+    :target: https://coveralls.io/github/jsmits/django-logutils?branch=master
+
 Various logging-related utilities for Django projects. For now, it provides
 a LoggingMiddleware class and an EventLogger class.
 
