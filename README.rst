@@ -9,7 +9,7 @@ django-logutils
     :target: https://travis-ci.org/jsmits/django-logutils
 
 Various logging-related utilities for Django projects. For now, it provides
-a LoggingMiddleware class.
+a LoggingMiddleware class and an EventLogger class.
 
 Quickstart
 ----------
@@ -33,8 +33,7 @@ your `MIDDLEWARE_CLASSES` setting::
 
 The extra information consists of:
 
-- event (default: 'request', can be overridden by using the
-  LOGUTILS_LOGGING_MIDDLEWARE_EVENT setting in your project
+- event (default: 'request')
 
 - remote ip address: the remote ip address of the user doing the request.
 
@@ -50,6 +49,9 @@ The extra information consists of:
 
 - request time
 
+N.B.: event can be overriden by using the LOGUTILS_LOGGING_MIDDLEWARE_EVENT
+setting in your project.
+
 The log message itself is a string composed of the remote ip address, the user
 email, the request method, the request url, the status code, the content
 length of the body and the request time. Additionally, a dictionary with the
@@ -57,9 +59,22 @@ log items are added as a extra keyword argument when sending a logging
 statement.
 
 If settings.DEBUG is True or the request time is more than 1 second, two
- additional parameters are added to the logging dictionary: `nr_queries` that
- represents the number of queries executed during the request-response cycle
- and `sql_time` that represents the time it took to execute those queries.
+additional parameters are added to the logging dictionary: `nr_queries` that
+represents the number of queries executed during the request-response cycle
+and `sql_time` that represents the time it took to execute those queries.
+
+EventLogger
+-----------
+
+The EventLogger class makes it easy to create dictionary-based logging
+statements, that can be used by log processors like Logstash. Log events can be
+used to track metrics and/or to create visualisations.
+
+Here's an example of how you can use it::
+
+    >>> from django_logutils.utils import EventLogger
+    >>> log_event = EventLogger('my_logger')
+    >>> log.event('my_event', {'action': 'push_button'})
 
 Development
 -----------
