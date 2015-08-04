@@ -7,7 +7,7 @@ History
 0.3.1 (unreleased)
 ++++++++++++++++++
 
-- Nothing changed yet.
+- Update documentation.
 
 
 0.3.0 (2015-08-04)
