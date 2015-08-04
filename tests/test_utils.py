@@ -1,4 +1,4 @@
-from django_logutils.utils import add_items_to_message, log_event
+from django_logutils.utils import add_items_to_message, log_event, EventLogger
 
 
 def test_add_items_to_message():
@@ -18,6 +18,16 @@ def test_add_items_to_message_with_empty_items():
 
 
 def test_log_event(caplog):
+    log_event('testevent', **{'type': 'type_1', 'time': 123456})
+    assert len(caplog.records()) == 1
+    record = caplog.records()[0]
+    assert 'event=testevent' in record.msg
+    assert 'type=type_1' in record.msg
+    assert 'time=123456' in record.msg
+
+
+def test_event_logger(caplog):
+    log_event = EventLogger('my_logger')
     log_event('testevent', **{'type': 'type_1', 'time': 123456})
     assert len(caplog.records()) == 1
     record = caplog.records()[0]
