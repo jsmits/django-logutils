@@ -34,3 +34,13 @@ def test_event_logger(caplog):
     assert 'event=testevent' in record.msg
     assert 'type=type_1' in record.msg
     assert 'time=123456' in record.msg
+
+
+def test_event_logger_with_root_logger(caplog):
+    log_event = EventLogger()
+    log_event('testevent', **{'type': 'type_1', 'time': 123456})
+    assert len(caplog.records()) == 1
+    record = caplog.records()[0]
+    assert 'event=testevent' in record.msg
+    assert 'type=type_1' in record.msg
+    assert 'time=123456' in record.msg

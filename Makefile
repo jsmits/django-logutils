@@ -2,14 +2,14 @@
 
 help:
 	@echo "clean-build - remove build artifacts"
-	@echo "clean-pyc - remove Python file artifacts"
-	@echo "lint - check style with flake8"
-	@echo "test - run tests quickly with the default Python"
-	@echo "test-all - run tests on every Python version with tox"
-	@echo "coverage - check code coverage quickly with the default Python"
+	@echo "clean-pyc - remove python file artifacts"
+	@echo "clean - run clean-build and clean-pyc"
+	@echo "lint - check style with flake8 and pylint"
+	@echo "test - run tests quickly with the default python"
+	@echo "test-all - run tests on every python version with tox"
+	@echo "coverage - check code coverage quickly with the default python"
 	@echo "docs - generate Sphinx HTML documentation, including API docs"
-	@echo "release - package and upload a release"
-	@echo "sdist - package"
+	@echo "release - make a release with zest.releaser's fullrelease"
 
 clean: clean-build clean-pyc
 
@@ -23,22 +23,25 @@ clean-pyc:
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 
-lint:
-	flake8 django_logutils tests
+flake8:
+	flake8 django_logutils tests --max-complexity 10 --exit-zero
+
+lint: flake8
+	pylint --load-plugins pylint_django -f colorized --rcfile=.pylint.cfg --disable=I0011 -j 4 -r n django_logutils/ tests/
 
 test:
-	python runtests.py tests
+	coverage run --source django_logutils -m py.test -v
+	coverage report -m
 
 test-all:
 	tox
 
-coverage:
-	coverage run --source django_logutils runtests.py tests
-	coverage report -m
+coverage: test
 	coverage html
 	open htmlcov/index.html
 
 docs:
+	export DJANGO_SETTINGS_MODULE=tests.settings
 	rm -f docs/django-logutils.rst
 	rm -f docs/modules.rst
 	sphinx-apidoc -o docs/ django_logutils
@@ -46,10 +49,5 @@ docs:
 	$(MAKE) -C docs html
 	open docs/_build/html/index.html
 
-release: clean
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
-
-sdist: clean
-	python setup.py sdist
-	ls -l dist
+release:
+	fullrelease

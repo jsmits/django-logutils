@@ -3,10 +3,23 @@
 History
 -------
 
+
 0.3.0 (unreleased)
 ++++++++++++++++++
 
 - Add `EventLogger` class.
+
+
+0.2.5 (2015-07-31)
+++++++++++++++++++
+
+- Reach 100% test coverage.
+
+
+0.2.4 (2015-07-31)
+++++++++++++++++++
+
+- Improve project structure. 
 
 
 0.2.3 (2015-07-30)

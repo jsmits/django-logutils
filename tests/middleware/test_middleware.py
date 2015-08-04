@@ -1,5 +1,7 @@
 import time
 
+from mock import Mock
+
 from django.http import HttpRequest, HttpResponse
 
 from django_logutils import middleware
@@ -24,21 +26,21 @@ def test_empty_log_message():
 def test_empty_logging_middleware_response():
     request = HttpRequest()
     response = HttpResponse()
-    mw = middleware.LoggingMiddleware()
-    mw.process_request(request)
-    response = mw.process_response(request, response)
+    lmw = middleware.LoggingMiddleware()
+    lmw.process_request(request)
+    response = lmw.process_response(request, response)
     assert response.status_code == 200
 
 
 def test_logging_middleware_request_start_time():
     request = HttpRequest()
-    mv = middleware.LoggingMiddleware()
-    assert mv.start_time is None
+    lmw = middleware.LoggingMiddleware()
+    assert lmw.start_time is None
     current_time = time.time()
-    mv.process_request(request)
+    lmw.process_request(request)
     # current_time and start_time should be not differ by more than 3 seconds
-    assert mv.start_time - current_time < 3
-    assert isinstance(mv.start_time, float)
+    assert lmw.start_time - current_time < 3
+    assert isinstance(lmw.start_time, float)
 
 
 def test_logging_middleware_with_empty_view(client, settings, caplog):
@@ -61,7 +63,7 @@ def test_logging_middleware_with_empty_view(client, settings, caplog):
     assert record.url == '/empty/'
 
 
-def test_HTTP_X_FORWARDED_FOR_header(client, settings, caplog):
+def test_http_x_forwarded_for_header(client, settings, caplog):
     settings.MIDDLEWARE_CLASSES = (
         'django_logutils.middleware.LoggingMiddleware',
     )
@@ -72,7 +74,7 @@ def test_HTTP_X_FORWARDED_FOR_header(client, settings, caplog):
     assert record.remote_address == '1.2.3.4'
 
 
-def test_HTTP_X_FORWARDED_FOR_header_without_INTERNAL_IPS(
+def test_http_x_forwarded_for_header_without_internal_ips(
         client, settings, caplog):
     settings.MIDDLEWARE_CLASSES = (
         'django_logutils.middleware.LoggingMiddleware',
@@ -116,3 +118,29 @@ def test_logging_middleware_with_non_empty_view(client, settings):
     settings.ROOT_URLCONF = 'tests.middleware.urls'
     response = client.get('/non_empty/')
     assert len(response.content) == 5
+
+
+def test_logging_middleware_with_user_email(caplog):
+    request = HttpRequest()
+    request.user = Mock()
+    request.user.email = 'john@example.com'
+    lmw = middleware.LoggingMiddleware()
+    lmw.process_response(request, HttpResponse())
+    record = caplog.records()[0]
+    assert record.user_email == 'john@example.com'
+
+
+def test_loglevel_warning_if_request_threshold_exceeded(caplog):
+    lmw = middleware.LoggingMiddleware()
+    lmw.start_time = time.time() - 2  # put the rquest two seconds back in time
+    lmw.process_response(HttpRequest(), HttpResponse())
+    record = caplog.records()[0]
+    assert record.levelname == 'WARNING'
+
+
+def test_logging_middleware_process_response_exception(caplog):
+    lmw = middleware.LoggingMiddleware()
+    # force an AttributeError by using None as response
+    lmw.process_response(HttpRequest(), None)
+    record = caplog.records()[0]
+    assert record.levelname == 'ERROR'
