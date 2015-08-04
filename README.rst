@@ -23,7 +23,7 @@ LoggingMiddleware
 
 LoggingMiddleware is middleware class for Django, that logs extra
 request-related information. To use it in your Django projects, add it to
-your `MIDDLEWARE_CLASSES` setting::
+your ``MIDDLEWARE_CLASSES`` setting::
 
     MIDDLEWARE_CLASSES = (
         ...
@@ -49,7 +49,7 @@ The extra information consists of:
 
 - request time
 
-N.B.: event can be overriden by using the LOGUTILS_LOGGING_MIDDLEWARE_EVENT
+N.B.: event can be overriden by using the ``LOGUTILS_LOGGING_MIDDLEWARE_EVENT``
 setting in your project.
 
 The log message itself is a string composed of the remote ip address, the user
