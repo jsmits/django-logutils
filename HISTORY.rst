@@ -4,7 +4,7 @@ History
 -------
 
 
-0.3.0 (unreleased)
+0.3.0 (2015-08-04)
 ++++++++++++++++++
 
 - Add `EventLogger` class.
