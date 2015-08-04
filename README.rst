@@ -67,7 +67,7 @@ setting in your project.
 The log message itself is a string composed of the remote ip address, the user
 email, the request method, the request url, the status code, the content
 length of the body and the request time. Additionally, a dictionary with the
-log items are added as a extra keyword argument when sending a logging
+log items are added as an extra keyword argument when sending a logging
 statement.
 
 If settings.DEBUG is True or the request time is more than 1 second, two
@@ -86,7 +86,7 @@ Here's an example of how you can use it::
 
     >>> from django_logutils.utils import EventLogger
     >>> log_event = EventLogger('my_logger')
-    >>> log.event('my_event', {'action': 'push_button'})
+    >>> log_event('my_event', {'action': 'push_button'})
 
 Development
 -----------
