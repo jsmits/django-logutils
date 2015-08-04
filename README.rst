@@ -59,9 +59,9 @@ log items are added as a extra keyword argument when sending a logging
 statement.
 
 If settings.DEBUG is True or the request time is more than 1 second, two
-additional parameters are added to the logging dictionary: `nr_queries` that
+additional parameters are added to the logging dictionary: ``nr_queries`` that
 represents the number of queries executed during the request-response cycle
-and `sql_time` that represents the time it took to execute those queries.
+and ``sql_time`` that represents the time it took to execute those queries.
 
 EventLogger
 -----------
