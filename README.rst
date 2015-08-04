@@ -8,6 +8,10 @@ django-logutils
 .. image:: https://travis-ci.org/jsmits/django-logutils.png?branch=master
     :target: https://travis-ci.org/jsmits/django-logutils
 
+.. image:: https://readthedocs.org/projects/django-logutils/badge/?version=latest
+    :target: https://readthedocs.org/projects/django-logutils/?badge=latest
+    :alt: Documentation Status
+
 Various logging-related utilities for Django projects. For now, it provides
 a LoggingMiddleware class and an EventLogger class.
 
