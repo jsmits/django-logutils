@@ -101,8 +101,6 @@ class LoggingMiddleware(object):
         """
         Create the logging message..
         """
-        REQUEST_TIME_THRESHOLD = 1.
-
         try:
             log_dict = create_log_dict(request, response)
 
@@ -113,7 +111,8 @@ class LoggingMiddleware(object):
                 and self.start_time else -1)
             log_dict.update({'request_time': request_time})
 
-            is_request_time_too_high = request_time > REQUEST_TIME_THRESHOLD
+            is_request_time_too_high = (
+                request_time > float(appsettings.REQUEST_TIME_THRESHOLD))
             use_sql_info = settings.DEBUG or is_request_time_too_high
 
             log_msg = create_log_message(log_dict, use_sql_info)
