@@ -4,10 +4,10 @@ History
 -------
 
 
-0.3.2 (unreleased)
+0.4.0 (unreleased)
 ++++++++++++++++++
 
-- Nothing changed yet.
+- Make REQUEST_TIME_THRESHOLD a setting.
 
 
 0.3.1 (2015-08-04)
@@ -19,7 +19,7 @@ History
 0.3.0 (2015-08-04)
 ++++++++++++++++++
 
-- Add `EventLogger` class.
+- Add ``EventLogger``` class.
 
 
 0.2.5 (2015-07-31)
@@ -37,13 +37,13 @@ History
 0.2.3 (2015-07-30)
 ++++++++++++++++++
 
-- Add `log_event` utility function for logging events. 
+- Add ``log_event`` utility function for logging events. 
 
 
 0.2.2 (2015-07-29)
 ++++++++++++++++++
 
-- Add `add_items_to_message` utility function.
+- Add ``add_items_to_message`` utility function.
 
 
 0.2.1 (2015-07-29)
