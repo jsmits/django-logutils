@@ -4,7 +4,7 @@ History
 -------
 
 
-0.4.0 (unreleased)
+0.4.0 (2015-08-20)
 ++++++++++++++++++
 
 - Make REQUEST_TIME_THRESHOLD a setting.
