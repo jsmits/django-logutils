@@ -12,7 +12,7 @@ django-logutils
     :target: https://readthedocs.org/projects/django-logutils/?badge=latest
     :alt: Documentation Status
 
-.. image:: https://coveralls.io/repos/jsmits/django-logutils/badge.svg?branch=master&service=github 
+.. image:: https://coveralls.io/repos/jsmits/django-logutils/badge.svg?branch=master&service=github
     :target: https://coveralls.io/github/jsmits/django-logutils?branch=master
 
 Various logging-related utilities for Django projects. For now, it provides
@@ -74,6 +74,10 @@ If settings.DEBUG is True or the request time is more than 1 second, two
 additional parameters are added to the logging dictionary: ``nr_queries`` that
 represents the number of queries executed during the request-response cycle
 and ``sql_time`` that represents the time it took to execute those queries.
+Slow requests are also raised to a loglevel of ``WARNING``.
+
+N.B.: the time threshold for slow requests can be overriden by using the
+``LOGUTILS_REQUEST_TIME_THRESHOLD`` setting in your project.
 
 EventLogger
 -----------
