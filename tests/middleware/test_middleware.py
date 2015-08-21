@@ -151,13 +151,15 @@ def test_logging_middleware_process_response_exception(caplog):
     assert record.levelname == 'ERROR'
 
 
-def test_default_logging_middleware_event_setting(client, base_settings, caplog):
+def test_default_logging_middleware_event_setting(
+        client, base_settings, caplog):
     client.get('/empty/')
     record = caplog.records()[0]
     assert record.event == 'request'
 
 
-def test_custom_logging_middleware_event_setting(client, base_settings, caplog):
+def test_custom_logging_middleware_event_setting(
+        client, base_settings, caplog):
     base_settings.LOGUTILS_LOGGING_MIDDLEWARE_EVENT = 'my_request'
     client.get('/empty/')
     record = caplog.records()[0]
