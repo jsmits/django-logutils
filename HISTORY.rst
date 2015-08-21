@@ -4,7 +4,7 @@ History
 -------
 
 
-0.4.1 (unreleased)
+0.4.1 (2015-08-21)
 ++++++++++++++++++
 
 - Add tests for app settings.
