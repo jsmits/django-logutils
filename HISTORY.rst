@@ -7,13 +7,13 @@ History
 0.4.1 (unreleased)
 ++++++++++++++++++
 
-- Nothing changed yet.
+- Add tests for app settings.
 
 
 0.4.0 (2015-08-20)
 ++++++++++++++++++
 
-- Make REQUEST_TIME_THRESHOLD a setting.
+- Make ``REQUEST_TIME_THRESHOLD`` a setting.
 
 
 0.3.1 (2015-08-04)

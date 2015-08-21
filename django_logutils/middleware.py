@@ -7,12 +7,9 @@ from __future__ import unicode_literals
 import logging
 import time
 
-from django.conf import settings
 from django.db import connection
 
-from django_logutils.models import LogutilsAppConf
-
-appsettings = LogutilsAppConf()
+from django_logutils.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +30,7 @@ def create_log_dict(request, response):
     return {
         # 'event' makes event-based filtering possible in logging backends
         # like logstash
-        'event': appsettings.LOGGING_MIDDLEWARE_EVENT,
+        'event': settings.LOGUTILS_LOGGING_MIDDLEWARE_EVENT,
         'remote_address': remote_addr,
         'user_email': user_email,
         'method': request.method,
@@ -112,7 +109,7 @@ class LoggingMiddleware(object):
             log_dict.update({'request_time': request_time})
 
             is_request_time_too_high = (
-                request_time > float(appsettings.REQUEST_TIME_THRESHOLD))
+                request_time > float(settings.LOGUTILS_REQUEST_TIME_THRESHOLD))
             use_sql_info = settings.DEBUG or is_request_time_too_high
 
             log_msg = create_log_message(log_dict, use_sql_info)
