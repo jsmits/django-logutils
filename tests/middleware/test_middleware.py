@@ -117,11 +117,30 @@ def test_logging_middleware_with_user_email(caplog):
 
 def test_loglevel_warning_if_request_threshold_exceeded(caplog):
     lmw = middleware.LoggingMiddleware()
-    # put the request two seconds back in time
+    # put the request back in time to exceed the default threshold
     lmw.start_time = time.time() - 2
     lmw.process_response(HttpRequest(), HttpResponse())
     record = caplog.records()[0]
     assert record.levelname == 'WARNING'
+
+
+def test_request_time_threshold_exceeded(client, base_settings, caplog):
+    lmw = middleware.LoggingMiddleware()
+    base_settings.LOGUTILS_REQUEST_TIME_THRESHOLD = 0.1
+    # put the request back in time to exceed the threshold
+    lmw.start_time = time.time() - 0.2
+    lmw.process_response(HttpRequest(), HttpResponse())
+    record = caplog.records()[0]
+    assert record.levelname == 'WARNING'
+
+
+def test_request_time_threshold_not_exceeded(client, base_settings, caplog):
+    lmw = middleware.LoggingMiddleware()
+    base_settings.LOGUTILS_REQUEST_TIME_THRESHOLD = 0.3
+    lmw.start_time = time.time() - 0.2
+    lmw.process_response(HttpRequest(), HttpResponse())
+    record = caplog.records()[0]
+    assert record.levelname == 'INFO'
 
 
 def test_logging_middleware_process_response_exception(caplog):
