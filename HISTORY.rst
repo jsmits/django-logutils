@@ -31,7 +31,7 @@ History
 0.3.0 (2015-08-04)
 ++++++++++++++++++
 
-- Add ``EventLogger``` class.
+- Add ``EventLogger`` class.
 
 
 0.2.5 (2015-07-31)
