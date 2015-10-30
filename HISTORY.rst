@@ -4,7 +4,7 @@ History
 -------
 
 
-0.4.2 (unreleased)
+0.4.2 (2015-10-30)
 ++++++++++++++++++
 
 - Support StreamingHttpResponse that doesn't have content length. 
