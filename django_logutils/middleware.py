@@ -27,6 +27,11 @@ def create_log_dict(request, response):
     if hasattr(request, 'user'):
         user_email = getattr(request.user, 'email', '-')
 
+    if response.streaming:
+        content_length = 'streaming'
+    else:
+        content_length = len(response.content)
+
     return {
         # 'event' makes event-based filtering possible in logging backends
         # like logstash
@@ -36,7 +41,7 @@ def create_log_dict(request, response):
         'method': request.method,
         'url': request.get_full_path(),
         'status': response.status_code,
-        'content_length': len(response.content),
+        'content_length': content_length,
         'request_time': -1,  # NA value: real value added by LoggingMiddleware
     }
 

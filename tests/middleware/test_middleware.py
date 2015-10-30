@@ -1,9 +1,12 @@
 import time
 
 from mock import Mock
+from mock import patch
 import pytest
 
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
+from django.http import HttpResponse
+from django.http import StreamingHttpResponse
 
 from django_logutils import middleware
 
@@ -39,6 +42,17 @@ def test_empty_logging_middleware_response():
     lmw.process_request(request)
     response = lmw.process_response(request, response)
     assert response.status_code == 200
+
+
+@patch('django_logutils.middleware.logger')
+def test_streaming_http_response(mock_logger):
+    request = HttpRequest()
+    response = StreamingHttpResponse()
+    lmw = middleware.LoggingMiddleware()
+    lmw.process_request(request)
+    lmw.process_response(request, response)
+    assert (mock_logger.info.call_args[1]['extra']['content_length'] ==
+            'streaming')
 
 
 def test_logging_middleware_request_start_time():
