@@ -11,3 +11,5 @@ Contributors
 ------------
 
 * Liam Andrew
+* Arjen Vrielink
+
