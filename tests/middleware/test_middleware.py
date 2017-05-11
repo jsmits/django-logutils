@@ -71,8 +71,9 @@ def test_logging_middleware_with_empty_view(client, base_settings, caplog):
     assert len(response.content) == 0
     assert len(caplog.records()) == 1
     record = caplog.records()[0]
-    assert '/empty/' in record.msg
-    assert '127.0.0.1' in record.msg
+    message = record.msg % record.args
+    assert '/empty/' in message
+    assert '127.0.0.1' in message
     assert record.remote_address == '127.0.0.1'
     assert record.levelname == 'INFO'
     assert record.method == 'GET'
