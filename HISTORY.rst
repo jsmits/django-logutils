@@ -7,7 +7,7 @@ History
 0.4.3 (unreleased)
 ++++++++++++++++++
 
-- Add option to make messages aggregable by Sentry for example.
+- Make sure that log messages are aggregable by tools like Sentry.
 
 
 0.4.2 (2015-10-30)
