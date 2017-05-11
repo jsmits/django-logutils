@@ -7,7 +7,7 @@ History
 0.4.3 (unreleased)
 ++++++++++++++++++
 
-- Nothing changed yet.
+- Make sure that log messages are aggregable by tools like Sentry.
 
 
 0.4.2 (2015-10-30)

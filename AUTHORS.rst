@@ -12,4 +12,5 @@ Contributors
 
 * Liam Andrew
 * Arjen Vrielink
-
+* Reinout van Rees
+* Carsten Byrman
