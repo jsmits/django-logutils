@@ -7,7 +7,7 @@ History
 0.4.3 (unreleased)
 ++++++++++++++++++
 
-- Nothing changed yet.
+- Add option to make messages aggregable by Sentry for example.
 
 
 0.4.2 (2015-10-30)

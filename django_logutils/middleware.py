@@ -46,13 +46,13 @@ def create_log_dict(request, response):
     }
 
 
-def create_log_message(log_dict, use_sql_info=False):
+def create_log_message(log_dict, use_sql_info=False, fmt=True):
     """
     Create the logging message string.
     """
     log_msg = (
-        "{remote_address} {user_email} {method} {url} {status} "
-        "{content_length} ({request_time:.2f} seconds)"
+        "%(remote_address)s %(user_email)s %(method)s %(url)s %(status)d "
+        "%(content_length)d (%(request_time).2f seconds)"
     )
     if use_sql_info:
         sql_time = sum(
@@ -60,9 +60,9 @@ def create_log_message(log_dict, use_sql_info=False):
         extra_log = {
             'nr_queries': len(connection.queries),
             'sql_time': sql_time}
-        log_msg += " ({nr_queries} SQL queries, {sql_time} ms)"
+        log_msg += " (%(nr_queries)d SQL queries, %(sql_time)f ms)"
         log_dict.update(extra_log)
-    return log_msg.format(**log_dict)
+    return log_msg % log_dict if fmt else log_msg
 
 
 class LoggingMiddleware(object):
@@ -117,12 +117,12 @@ class LoggingMiddleware(object):
                 request_time > float(settings.LOGUTILS_REQUEST_TIME_THRESHOLD))
             use_sql_info = settings.DEBUG or is_request_time_too_high
 
-            log_msg = create_log_message(log_dict, use_sql_info)
+            log_msg = create_log_message(log_dict, use_sql_info, fmt=False)
 
             if is_request_time_too_high:
-                logger.warning(log_msg, extra=log_dict)
+                logger.warning(log_msg, log_dict, extra=log_dict)
             else:
-                logger.info(log_msg, extra=log_dict)
+                logger.info(log_msg, log_dict, extra=log_dict)
         except Exception as e:
             logger.exception(e)
 
