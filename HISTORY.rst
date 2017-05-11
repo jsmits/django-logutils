@@ -4,7 +4,7 @@ History
 -------
 
 
-0.4.3 (unreleased)
+0.4.3 (2017-05-11)
 ++++++++++++++++++
 
 - Make sure that log messages are aggregable by tools like Sentry.
